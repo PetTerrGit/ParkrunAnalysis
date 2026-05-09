@@ -83,8 +83,8 @@ python main.py --list
 
 ### Example 1: Single Event with Web Scraping
 ```bash
-python main.py --event Windsor \
-    --url https://uk.parkrun.com/windsor/results \
+python main.py --event stadtparkgraz \
+    --url //https://www.parkrun.co.at/stadtparkgraz/results/eventhistory/ \
     --output-dir ./plots
 ```
 
@@ -213,7 +213,7 @@ date,first_male,first_female,finishers,helpers
 ### Web Scraping Notes
 
 The scraper is designed for standard parkrun website structures but may need adjustment for:
-- Non-UK parkrun sites (different URL pattern)
+- Different URL patterns
 - Custom event pages
 - Website structure changes
 
