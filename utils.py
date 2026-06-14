@@ -164,7 +164,7 @@ class QuickTest:
         
         # Test statistics
         stats = engine.get_growth_stats(df)
-        logger.info(f"✓ Growth stats: {stats['percent_change']:.1f}% change")
+        logger.info(f"✓ Growth stats: {stats['growth']:.1f} people per year growth")
         
         # Test seasonal stats
         seasonal = engine.get_seasonal_stats(df)
@@ -175,7 +175,7 @@ class QuickTest:
         logger.info(f"✓ Rolling mean calculated: {len(rolling)} values")
         
         # Test trendline
-        x, y = engine.calculate_trendline(df)
+        x, y, slope = engine.calculate_trendline(df)
         logger.info(f"✓ Trendline calculated: {len(x)} points")
     
     @staticmethod
