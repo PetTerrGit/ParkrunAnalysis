@@ -54,26 +54,18 @@ class DataManager:
             return True
         
         try:
-            # Try to read the CSV
             df = pd.read_csv(csv_path)
             
-            # Check if it has a last_updated column
-            if 'last_updated' in df.columns:
-                # Get the most recent timestamp from the last_updated column
-                try:
-                    last_updated = pd.to_datetime(df['last_updated']).max()
-                    age = datetime.now() - last_updated.to_pydatetime()
-                    return age > timedelta(days=days_old)
-                except (ValueError, TypeError):
-                    # If timestamp is invalid, check file modification time
-                    mod_time = datetime.fromtimestamp(csv_path.stat().st_mtime)
-                    age = datetime.now() - mod_time
-                    return age >= timedelta(days=days_old)
-            else:
-                # No timestamp column, fall back to file modification time
+            # Get the most recent date from the date column
+            try:
+                last_date = pd.to_datetime(df['date']).max()
+                age = datetime.now() - last_date.to_pydatetime()
+                return age > timedelta(days=days_old)
+            except (ValueError, TypeError):
+                # If timestamp is invalid, check file modification time
                 mod_time = datetime.fromtimestamp(csv_path.stat().st_mtime)
                 age = datetime.now() - mod_time
-                return age > timedelta(days=days_old)
+                return age >= timedelta(days=days_old)
         
         except Exception as e:
             # If we can't read the file, check modification time
